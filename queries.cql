@@ -15,7 +15,8 @@ Create (t:Template { name: "recipe_template" })
 // Link node and template
 match (r:Recipe), (t:Template)
 where r.name = "Cake" and t.name = "recipe_template"
-create (r)-[:RENDERED_WITH]->(t)
+create (r)-[:RENDERED_WITH { slug: "Cake" }]->(t)
 
 // Set template text
-match (t:Template) set t.template = "<h1>Recipe Name: {{node.properties.name}}</h1>"
+match (t:Template) set
+t.text = "<h1>Recipe Name: {{node.properties.name}}</h1>"
